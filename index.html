@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Roblox Themed Login</title>
+    <link
+        href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+        rel="stylesheet"
+    />
+    <style>
+        /****************************
+         *  Global font & backdrop  *
+         ***************************/
+        body {
+            font-family: "Arial", sans-serif;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Roblox collage background that fades out vertically */
+        body::before {
+            content: "";
+            position: fixed; /* sits behind everything */
+            inset: 0;
+            z-index: -10;
+            background: url("2.jpg") center/cover no-repeat;
+            /* Vertical fade (top opaque ➜ bottom transparent) */
+            -webkit-mask-image: linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 1) 0%,   /* opaque at top */
+                rgba(0, 0, 0, 0.7) 60%,
+                rgba(0, 0, 0, 0) 100% /* fully transparent at bottom */
+            );
+            mask-image: linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 1) 0%,
+                rgba(0, 0, 0, 0.7) 60%,
+                rgba(0, 0, 0, 0) 100%
+            );
+        }
+
+        /* Roblox brand colours */
+        .roblox-blue {
+            background-color: #00a0d6; /* Roblox Blue */
+        }
+        .roblox-green {
+            background-color: #1dbf73; /* Roblox Green */
+        }
+        .roblox-text {
+            font-family: "Verdana", sans-serif;
+            font-weight: bold;
+        }
+
+        /************************
+         *  Simple animations  *
+         ***********************/
+        .animate-fadeIn {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        .animate-slideUp {
+            animation: slideUp 1s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Custom background for login container */
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.9); /* Light background with opacity */
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center h-screen overflow-hidden">
+
+    <!-- Main Container (does not use background image) -->
+    <div
+        class="login-container p-8 rounded-xl shadow-lg max-w-sm w-full animate-slideUp sm:max-w-xs"
+    >
+        <!-- Game Image with Animation -->
+        <div class="mb-4 text-center animate-fadeIn">
+            <img
+                src="1.png"
+                alt="Roblox Game"
+                class="rounded-lg mb-4 h-40 w-40 mx-auto transform hover:scale-105 transition-transform duration-300"
+            />
+        </div>
+
+        <div class="text-center animate-fadeIn">
+            <h2
+                class="text-3xl font-bold text-roblox-blue mb-4 roblox-text text-xl sm:text-3xl"
+            >
+                Welcome to Roblox!
+            </h2>
+            <p class="text-gray-600 mb-6 text-sm sm:text-base">
+                Please log in to start your adventure!
+            </p>
+        </div>
+
+        <!-- Login Form -->
+        <form id="loginForm" class="animate-fadeIn">
+            <!-- Username Input -->
+            <div class="mb-4">
+                <label
+                    for="username"
+                    class="block text-gray-700 text-sm font-medium"
+                    >Username</label
+                >
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    class="w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-roblox-blue text-sm sm:text-base"
+                    placeholder="Enter your username"
+                    required
+                />
+            </div>
+
+            <!-- Password Input -->
+            <div class="mb-4">
+                <label
+                    for="password"
+                    class="block text-gray-700 text-sm font-medium"
+                    >Password</label
+                >
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    class="w-full p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-roblox-blue text-sm sm:text-base"
+                    placeholder="Enter your password"
+                    required
+                />
+            </div>
+
+           <!-- Login Button -->
+<div class="mb-6">
+    <button
+        type="submit"
+        class="w-full py-3 px-4 bg-green-400 text-white rounded-lg hover:bg-green-500 transition ease-in-out duration-200 transform hover:scale-105 text-sm sm:text-base"
+        style="min-height: 50px;"
+    >
+        Log In
+    </button>
+</div>
+
+
+            <!-- Forgot Password Link -->
+            <div class="text-center">
+                <a href="#" class="text-sm text-roblox-blue hover:underline">
+                    Forgot your password?
+                </a>
+            </div>
+        </form>
+
+        <!-- Error Message -->
+        <p
+            id="errorMessage"
+            class="text-center text-red-500 mt-4 hidden"
+        >
+            Please enter valid credentials!
+        </p>
+    </div>
+
+    <!-- External JS -->
+    <script src="script.js"></script>
+</body>
+</html>
